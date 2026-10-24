@@ -1,0 +1,38 @@
+# ==============================================================================
+# Apache Configuration (.htaccess) for Hostinger / Shared Apache Hosting
+# ==============================================================================
+
+# Disable directory listing
+Options -Indexes
+
+# Follow symbolic links
+Options +FollowSymLinks
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # ----------------------------------------------------------------------
+    # 1. Protect Sensitive Files & Directories
+    # Block direct web access to source code, configs, database, and dotfiles
+    # ----------------------------------------------------------------------
+    RewriteRule ^(\.git|\.env|composer\.(json|lock)|\.gitignore) - [F,L,NC]
+    RewriteRule ^(source|config|database)(/|$) - [F,L,NC]
+
+    # ----------------------------------------------------------------------
+    # 2. Allow Direct Access to Static Assets
+    # If the requested file or directory exists (e.g. in /assets/ or /images/),
+    # serve it directly without routing through index.php.
+    # ----------------------------------------------------------------------
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # ----------------------------------------------------------------------
+    # 3. Front Controller Pattern
+    # Route all other requests to index.php.
+    # index.php inspects PHP session state and redirects unauthenticated users
+    # to /login.
+    # ----------------------------------------------------------------------
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>

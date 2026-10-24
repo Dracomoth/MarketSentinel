@@ -1,0 +1,36 @@
+# Configuration files
+config.php
+/config.php
+config/config.php
+*.local.php
+.env
+.env.*
+!.env.example
+
+# Composer dependencies
+/vendor/
+composer.phar
+
+# Logs and temporary files
+*.log
+/logs/
+/tmp/
+/temp/
+
+# Operating System artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor configuration
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+
+# PHPUnit / Test artifacts
+.phpunit.result.cache
+.php_cs.cache
+/coverage/
