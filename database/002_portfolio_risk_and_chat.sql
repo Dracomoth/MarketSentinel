@@ -40,4 +40,19 @@ CREATE TABLE IF NOT EXISTS `portfolio_chat_messages` (
     CONSTRAINT `fk_portfolio_chat_portfolio` FOREIGN KEY (`portfolio_id`) REFERENCES `portfolios` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- -----------------------------------------------------------------------------
+-- 4. Update System Schema Version
+-- -----------------------------------------------------------------------------
+INSERT INTO `system_info` (`item`, `version`) VALUES ('database', '2.0.0')
+ON DUPLICATE KEY UPDATE
+    `version` = '2.0.0',
+    `updated` = CURRENT_TIMESTAMP;
+
+INSERT INTO `system_info` (`item`, `version`) VALUES ('system', '1.0.0')
+ON DUPLICATE KEY UPDATE
+    `version` = '1.0.0',
+    `updated` = CURRENT_TIMESTAMP;
+
 SET FOREIGN_KEY_CHECKS = 1;
+
+

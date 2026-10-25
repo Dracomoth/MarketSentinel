@@ -123,9 +123,14 @@ ON DUPLICATE KEY UPDATE
 -- -----------------------------------------------------------------------------
 -- 6. Update System Schema Version
 -- -----------------------------------------------------------------------------
-INSERT INTO `system_info` (`item`, `version`) VALUES ('database', '0.7.0')
+INSERT INTO `system_info` (`item`, `version`) VALUES ('database', '1.0.0')
 ON DUPLICATE KEY UPDATE
-    `version` = '0.7.0',
+    `version` = '1.0.0',
+    `updated` = CURRENT_TIMESTAMP;
+
+INSERT INTO `system_info` (`item`, `version`) VALUES ('system', '1.0.0')
+ON DUPLICATE KEY UPDATE
+    `version` = '1.0.0',
     `updated` = CURRENT_TIMESTAMP;
 
 SET FOREIGN_KEY_CHECKS = 1;
