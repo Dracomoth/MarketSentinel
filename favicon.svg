@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <!-- Background Gradient: Deep Institutional Navy -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <!-- Emerald Primary Gradient -->
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Amber / Gold Accent Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded Tab Background Container -->
+  <rect width="32" height="32" rx="7" fill="url(#bgGrad)"/>
+  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="6.25" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+
+  <!-- MarketSentinel Emblem (24x24 geometry centered in 32x32) -->
+  <g transform="translate(4, 4)">
+    <!-- Top Prism / Facet -->
+    <polygon points="12 2 2 7 12 12 22 7 12 2" fill="url(#emeraldGrad)" stroke="#6EE7B7" stroke-width="1.2" stroke-linejoin="round"/>
+
+    <!-- Mid Chevron (Gold Accent) -->
+    <polyline points="2 12 12 17 22 12" fill="none" stroke="url(#goldGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Bottom Chevron (Emerald Foundation) -->
+    <polyline points="2 17 12 22 22 17" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

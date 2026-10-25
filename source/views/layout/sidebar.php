@@ -173,9 +173,6 @@ if ($displayName === '') {
                                                     <span class="sublink-dot"></span>
                                                     <span class="sublink-label"><?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?></span>
                                                 </div>
-                                                <span class="sublink-order-badge" title="Sort order: <?= (int) $item['sort_order'] ?>">
-                                                    #<?= (int) $item['sort_order'] ?>
-                                                </span>
                                             </a>
                                         </li>
                                     <?php endforeach; ?>
