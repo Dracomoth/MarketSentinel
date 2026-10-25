@@ -13,6 +13,7 @@
 require_once dirname(__DIR__) . '/services/Database.php';
 require_once dirname(__DIR__) . '/repositories/PortfolioRepository.php';
 require_once dirname(__DIR__) . '/repositories/TrackerRepository.php';
+require_once dirname(__DIR__) . '/repositories/SystemInfoRepository.php';
 require_once dirname(__DIR__) . '/services/MarketDataService.php';
 
 class GuardianService {
@@ -274,6 +275,9 @@ class GuardianService {
         }
 
         $duration = round(microtime(true) - $startTime, 3);
+
+        // Record last successful Guardian surveillance execution
+        SystemInfoRepository::setItem('last_guardian_run', $runTimestamp);
 
         return [
             'checked_items'               => $checkedCount,

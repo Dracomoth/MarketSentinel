@@ -77,11 +77,12 @@ class LayoutService {
         $appName = $config['app']['name'] ?? 'BasePHP';
         $appEnv = $config['app']['environment'] ?? 'development';
 
-        // System versions
+        // System versions & monitoring
         $versions = SystemInfoRepository::getAllVersions();
         $systemVersion = $versions['system'] ?? '0.0.0';
         $databaseVersion = $versions['database'] ?? '0.0.0';
         $baseVersion = $versions['base'] ?? '1.0.0';
+        $lastGuardianRun = SystemInfoRepository::getLastGuardianRun();
 
         // Database status
         $isDbOnline = Database::isOnline();
@@ -116,6 +117,7 @@ class LayoutService {
             'systemVersion'   => $systemVersion,
             'databaseVersion' => $databaseVersion,
             'baseVersion'     => $baseVersion,
+            'lastGuardianRun' => $lastGuardianRun,
             'isDbOnline'      => $isDbOnline,
             'currentPath'     => $currentPath,
             'initials'        => $initials,

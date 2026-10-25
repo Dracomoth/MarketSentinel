@@ -1067,6 +1067,42 @@ h4 { font-size: var(--font-size-md); }
     color: var(--color-danger);
 }
 
+/* Guardian Background Surveillance Status */
+.footer-item-guardian.is-recent .footer-status-dot {
+    background-color: var(--color-success);
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
+.footer-item-guardian.is-recent .footer-value {
+    color: var(--color-success);
+}
+
+.footer-item-guardian.is-stale .footer-status-dot {
+    background-color: var(--color-warning);
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+}
+
+.footer-item-guardian.is-stale .footer-value {
+    color: var(--color-warning);
+}
+
+.footer-item-guardian.is-overdue .footer-status-dot {
+    background-color: var(--color-danger);
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+}
+
+.footer-item-guardian.is-overdue .footer-value {
+    color: var(--color-danger);
+}
+
+.footer-item-guardian.is-inactive .footer-status-dot {
+    background-color: var(--color-text-muted);
+}
+
+.footer-item-guardian.is-inactive .footer-value {
+    color: var(--color-text-muted);
+}
+
 /* =============================================================================
    8. Cards, Surface Containers & Elevations
    ============================================================================= */

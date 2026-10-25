@@ -21,6 +21,9 @@ require_once $baseDir . '/source/repositories/PortfolioRepository.php';
 require_once $baseDir . '/source/services/MarketDataService.php';
 require_once $baseDir . '/source/services/GuardianService.php';
 
+// Start capturing output for the file log
+ob_start();
+
 // Parse command line arguments
 $args = $argv ?? [];
 $isForced = in_array('--force', $args, true) || in_array('-f', $args, true);
@@ -192,7 +195,21 @@ echo "  Portfolios Synchronized:  " . (is_numeric($result['portfolios_updated'] 
 if (isset($result['tracked_assets_updated']) && $result['tracked_assets_updated'] > 0) {
     echo "  Tracked Assets Refreshed: " . $result['tracked_assets_updated'] . "\n";
 }
+echo "  Recorded in System Info:  " . cliColor("item: last_guardian_run", 'cyan') . "\n";
 echo "  Cycle Run Duration:       " . $result['duration_seconds'] . "s\n";
 echo cliColor("================================================================================", 'cyan') . "\n\n";
+
+// Capture output, write to log file, and send to stdout
+$output = ob_get_clean();
+echo $output; // This ensures Hostinger's "View Output" button still sees it
+
+$logFile = $baseDir . '/logs/guardian.log';
+$logDir = dirname($logFile);
+if (!is_dir($logDir)) {
+    @mkdir($logDir, 0777, true);
+}
+// Strip ANSI color codes for clean text reading in File Manager
+$cleanOutput = preg_replace('/\e[[][A-Za-z0-9;]*m/', '', $output);
+file_put_contents($logFile, $cleanOutput, FILE_APPEND);
 
 exit(0);

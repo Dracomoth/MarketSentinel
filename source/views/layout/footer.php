@@ -21,6 +21,12 @@ $systemVersion = $layoutContext['systemVersion'];
 $databaseVersion = $layoutContext['databaseVersion'];
 $isDbOnline = $layoutContext['isDbOnline'];
 $currentDate = $layoutContext['currentDate'];
+$lastGuardianRun = $layoutContext['lastGuardianRun'] ?? [
+    'timestamp'     => null,
+    'relative_time' => 'Never',
+    'state_class'   => 'is-inactive',
+    'tooltip'       => 'Never executed',
+];
 ?>
 <footer class="app-footer">
     <div class="footer-container">
@@ -47,6 +53,16 @@ $currentDate = $layoutContext['currentDate'];
                 <span class="footer-status-dot"></span>
                 <span class="footer-label">Database:</span>
                 <span class="footer-value"><?= $isDbOnline ? 'Connected' : 'Offline' ?></span>
+            </div>
+
+            <span class="footer-divider"></span>
+
+            <!-- Guardian Surveillance Status -->
+            <div class="footer-item footer-item-guardian <?= htmlspecialchars($lastGuardianRun['state_class'] ?? 'is-inactive', ENT_QUOTES, 'UTF-8') ?>" 
+                 title="Guardian Background Surveillance: <?= htmlspecialchars($lastGuardianRun['tooltip'] ?? 'Never executed', ENT_QUOTES, 'UTF-8') ?>">
+                <span class="footer-status-dot"></span>
+                <span class="footer-label">Guardian:</span>
+                <span class="footer-value"><?= htmlspecialchars($lastGuardianRun['relative_time'] ?? 'Never', ENT_QUOTES, 'UTF-8') ?></span>
             </div>
 
             <span class="footer-divider"></span>
