@@ -31,6 +31,8 @@ if (!empty($avatarPath)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
@@ -80,7 +82,7 @@ if (!empty($avatarPath)) {
                     <?php endif; ?>
 
                     <?php if (!empty($success)): ?>
-                        <div class="alert alert-success" style="background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #047857;">
+                        <div class="alert alert-success">
                             <?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?>
                         </div>
                     <?php endif; ?>

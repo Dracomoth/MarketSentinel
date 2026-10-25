@@ -1,10 +1,11 @@
 /**
- * BasePHP - Core Application UI Interactions
+ * MarketSentinel - Core Application UI Interactions
  * 
  * Handles:
  * - Off-canvas sidebar open, close, and keyboard accessibility
  * - Sidebar grouped screens collapsible accordions
  * - Header user avatar circle popover / dropdown menu
+ * - Theme switcher (Executive Dark Slate/Navy <-> Crisp Light Finance) with localStorage persistence
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -98,7 +99,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Global Keyboard Accessibility (Escape key)
+    // 4. Institutional Theme Switcher (Dark Executive / Light Finance)
+    // -------------------------------------------------------------------------
+    const themeToggleBtn = document.getElementById('btn-theme-toggle');
+    const savedTheme = localStorage.getItem('marketsentinel_theme');
+
+    function updateThemeIcon(isLight) {
+        if (!themeToggleBtn) return;
+        if (isLight) {
+            themeToggleBtn.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            `;
+            themeToggleBtn.title = "Switch to Executive Dark Slate Mode";
+        } else {
+            themeToggleBtn.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+            `;
+            themeToggleBtn.title = "Switch to Crisp Light Finance Mode";
+        }
+    }
+
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        updateThemeIcon(true);
+    } else {
+        updateThemeIcon(false);
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            if (newTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('marketsentinel_theme', 'light');
+                updateThemeIcon(true);
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('marketsentinel_theme', 'dark');
+                updateThemeIcon(false);
+            }
+        });
+    }
+
+    // -------------------------------------------------------------------------
+    // 5. Global Keyboard Accessibility (Escape key)
     // -------------------------------------------------------------------------
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'Esc') {

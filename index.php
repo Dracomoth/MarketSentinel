@@ -102,6 +102,21 @@ switch ($path) {
         ProfileController::handle();
         break;
 
+    case '/portfolio-builder':
+        require_once __DIR__ . '/source/controllers/PortfolioBuilderController.php';
+        PortfolioBuilderController::handle();
+        break;
+
+    case '/portfolios':
+        require_once __DIR__ . '/source/controllers/PortfoliosController.php';
+        PortfoliosController::handle();
+        break;
+
+    case '/tracker':
+        require_once __DIR__ . '/source/controllers/TrackerController.php';
+        TrackerController::handle();
+        break;
+
     case '/':
         require_once __DIR__ . '/source/services/PermissionService.php';
         $user = $_SESSION['user'] ?? null;

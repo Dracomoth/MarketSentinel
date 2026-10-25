@@ -59,9 +59,69 @@ return [
     // Application Settings
     // -------------------------------------------------------------------------
     'app' => [
-        'name'        => 'BasePHP',
+        'name'        => 'MarketSentinel',
         'environment' => 'development', // 'development' or 'production'
         'debug'       => true,
         'url'         => 'http://localhost:8000',
+    ],
+
+    // -------------------------------------------------------------------------
+    // External Market & News Data Providers
+    // -------------------------------------------------------------------------
+    'market_data' => [
+        // Financial Modeling Prep (Quotes, OHLCV, Financial Ratios)
+        'fmp' => [
+            'api_key'  => '',
+            'base_url' => 'https://financialmodelingprep.com/api/v3',
+        ],
+
+        // Finnhub (Company News, Macro Trends, Calendar)
+        'finnhub' => [
+            'api_key'  => '',
+            'base_url' => 'https://finnhub.io/api/v1',
+        ],
+
+        // Cache TTL in seconds (prevents burning API quotas on repeat views)
+        'cache_ttl' => 900, // 15 minutes
+    ],
+
+    // -------------------------------------------------------------------------
+    // Multi-Agent LLM Intelligence Engine
+    // -------------------------------------------------------------------------
+    'ai' => [
+        // OpenRouter or direct provider key
+        'api_key'  => '',
+        'base_url' => 'https://openrouter.ai/api/v1',
+
+        // Model assignments for each council role
+        'models' => [
+            // Cost-efficient model for debate generation (Bull & Bear)
+            'analyst' => 'deepseek/deepseek-chat', 
+            
+            // High-reasoning model for the final Arbiter / Risk Officer verdict
+            'arbiter' => 'anthropic/claude-sonnet-4.5',
+        ],
+
+        // Request timeout in seconds for agent completions
+        'timeout' => 45,
+    ],
+
+    // -------------------------------------------------------------------------
+    // Notification & Alerts (Optional)
+    // -------------------------------------------------------------------------
+    'notifications' => [
+        'telegram' => [
+            'enabled'   => false,
+            'bot_token' => '',
+            'chat_id'   => '',
+        ],
+    ],
+
+    // -------------------------------------------------------------------------
+    // System Execution & Rate Limits
+    // -------------------------------------------------------------------------
+    'limits' => [
+        'max_daily_fmp_calls' => 200, // Safety threshold for free tiers
+        'sleep_between_scans' => 2,   // Seconds between ticker checks in cron sweeps
     ],
 ];
